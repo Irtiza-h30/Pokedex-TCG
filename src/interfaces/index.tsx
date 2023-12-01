@@ -7,26 +7,7 @@ export interface PokemonCard {
   };
   supertype?: string;
   subtypes?: string[];
-  hp?: string;
   types?: string[];
-  abilities?: {
-    name: string;
-    text: string;
-    type: string;
-  }[];
-  attacks?: {
-    name: string;
-    cost: string[];
-    convertedEnergyCost: number;
-    damage: string;
-    text: string;
-  }[];
-  weaknesses?: {
-    type: string;
-    value: string;
-  }[];
-  retreatCost?: string[];
-  convertedRetreatCost?: number;
   set?: {
     id: string;
     name: string;
@@ -49,27 +30,11 @@ export interface PokemonCard {
   number?: string;
   artist?: string;
   rarity?: string;
-  flavorText?: string;
-  nationalPokedexNumbers?: number[];
   cardmarket?: {
     url: string;
     updatedAt: string;
     prices: {
-      averageSellPrice: string;
-      lowPrice: string;
       trendPrice: string;
-      germanProLow: string;
-      suggestedPrice: string;
-      reverseHoloSell: string;
-      reverseHoloLow: string;
-      reverseHoloTrend: string;
-      lowPriceExPlus: string;
-      avg1: string;
-      avg7: string;
-      avg30: string;
-      reverseHoloAvg1: string;
-      reverseHoloAvg7: string;
-      reverseHoloAvg30: string;
     };
   };
   evolvesFrom?: string;
