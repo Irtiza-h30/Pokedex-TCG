@@ -1,0 +1,33 @@
+.container {
+  padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  overscroll-behavior: none;
+}
+
+.alert {
+  margin: 32px 32px 32px 64px;
+  height: fit-content;
+}
+
+.content {
+  margin-left: 32px;
+}
+
+.sider {
+  position: sticky !important;
+  top: 0;
+  height: calc(100vh - 82px);
+}
+
+.title {
+  margin-left: 32px;
+}
+
+@media screen and (max-width: 1100px) {
+  .sider {
+    height: calc(100vh - 154px);
+  }
+}

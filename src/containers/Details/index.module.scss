@@ -1,0 +1,34 @@
+.container {
+  padding: 32px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.card {
+  align-self: flex-start;
+  min-width: 375px;
+  .inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+  .label {
+    display: flex;
+    gap: 42px;
+    justify-content: space-between;
+    :first-child {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+}

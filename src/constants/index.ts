@@ -1,0 +1,80 @@
+const ORDER_BY = {
+  name: "Name",
+  number: "Number",
+  "set.series": "Series",
+  level: "Level",
+  rarity: "Rarity",
+  hp: "HP",
+};
+
+const TYPES = [
+  "Colorless",
+  "Darkness",
+  "Dragon",
+  "Fairy",
+  "Fighting",
+  "Fire",
+  "Grass",
+  "Lightning",
+  "Metal",
+  "Psychic",
+  "Water",
+];
+
+const SUBTYPES = [
+  "BREAK",
+  "Baby",
+  "Basic",
+  "EX",
+  "GX",
+  "Goldenrod Game Corner",
+  "Item",
+  "LEGEND",
+  "Level-Up",
+  "MEGA",
+  "Pokémon Tool",
+  "Pokémon Tool F",
+  "Rapid Strike",
+  "Rocket's Secret Machine",
+  "Restored",
+  "Single Strike",
+  "Special",
+  "Stadium",
+  "Stage 1",
+  "Stage 2",
+  "Supporter",
+  "TAG TEAM",
+  "Technical Machine",
+  "V",
+  "VMAX",
+];
+
+const RARITIES = [
+  "Amazing Rare",
+  "Common",
+  "LEGEND",
+  "Promo",
+  "Rare",
+  "Rare ACE",
+  "Rare BREAK",
+  "Rare Holo",
+  "Rare Holo EX",
+  "Rare Holo GX",
+  "Rare Holo LV.X",
+  "Rare Holo Star",
+  "Rare Holo V",
+  "Rare Holo VMAX",
+  "Rare Prime",
+  "Rare Prism Star",
+  "Rare Rainbow",
+  "Rare Secret",
+  "Rare Shining",
+  "Rare Shiny",
+  "Rare Shiny GX",
+  "Rare Ultra",
+  "Uncommon",
+];
+
+const MD_SCREEN_BREAKPOINT = 768;
+
+export { ORDER_BY, TYPES, SUBTYPES, RARITIES, MD_SCREEN_BREAKPOINT };
