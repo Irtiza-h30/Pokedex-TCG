@@ -1,19 +1,18 @@
-.container {
+.content {
+  margin-left: 32px;
+}
+
+.cards {
   padding: 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
-  overscroll-behavior: none;
 }
 
 .alert {
   margin: 32px 32px 32px 64px;
   height: fit-content;
-}
-
-.content {
-  margin-left: 32px;
 }
 
 .sider {

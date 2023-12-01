@@ -126,11 +126,10 @@ const Home = () => {
           <Title className={styles.title} level={5} type="secondary">
             {totalCount} {totalCount === 1 ? "result" : "results"} found
           </Title>
-          <div className={styles.container}>
+          <div className={styles.cards}>
             {response?.data?.map((card) => (
               <Card card={card} key={card.id} />
             ))}
-            I
           </div>
         </div>
       );
