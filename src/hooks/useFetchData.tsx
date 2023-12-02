@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 
 const useFetchData = <T,>(initialState: T) => {
-  console.log(initialState);
   const [response, setResponse] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
 
