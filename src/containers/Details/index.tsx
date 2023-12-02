@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Spin, Typography, Card, Tag } from "antd";
 import { Link, useParams } from "react-router-dom";
 
@@ -6,20 +6,30 @@ import styles from "./index.module.scss";
 import BackButton from "components/BackButton";
 import { PokemonCard } from "interfaces";
 import NoResultsFound from "components/NoResultsFound";
+import useFetchData from "hooks/useFetchData";
 
 const { Title, Text } = Typography;
 
+interface PokemonCardData {
+  data: PokemonCard;
+}
+
 const Details = () => {
   const { id } = useParams();
-  const [data, setCardData] = useState<PokemonCard>();
-  const [isLoading, setIsLoading] = useState(true);
+  const { response, isLoading, fetchData } = useFetchData<PokemonCardData>({
+    data: {
+      id: "",
+      name: "",
+      images: {},
+      set: {},
+      cardmarket: {},
+    },
+  });
+  const { data } = response;
 
   useEffect(() => {
-    fetch(`https://api.pokemontcg.io/v2/cards/${id}`)
-      .then((res) => res.json())
-      .then((res) => setCardData(res.data))
-      .finally(() => setIsLoading(false));
-  }, [id]);
+    fetchData(`https://api.pokemontcg.io/v2/cards/${id}`);
+  }, [id, fetchData]);
 
   const {
     name,
@@ -30,7 +40,7 @@ const Details = () => {
     cardmarket,
     evolvesFrom,
     evolvesTo,
-  } = data || {};
+  } = data;
 
   const renderLabel = (
     label: string,

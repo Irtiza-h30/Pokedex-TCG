@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Alert, Layout, Spin, Typography } from "antd";
 
 import { useColorTheme } from "contexts/ColorThemeContext";
@@ -15,6 +15,7 @@ import { PokemonCard } from "interfaces";
 
 import styles from "./index.module.scss";
 import NoResultsFound from "components/NoResultsFound";
+import useFetchData from "hooks/useFetchData";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -34,14 +35,14 @@ const formatTerms = (term: string, field: string) =>
     .join(" OR ");
 
 const Home = () => {
-  const [response, setResponse] = useState<ApiResponse>({
+  const { isDarkMode } = useColorTheme();
+  const { width } = useScreenSize();
+
+  const { response, isLoading, fetchData } = useFetchData<ApiResponse>({
     count: 0,
     data: [],
     totalCount: 0,
   });
-  const { isDarkMode } = useColorTheme();
-  const { width } = useScreenSize();
-  const [isLoading, setIsLoading] = useState(true);
 
   const { data, totalCount } = response;
 
@@ -54,8 +55,8 @@ const Home = () => {
     sortDirection = "asc",
   } = useQueryParams();
 
-  // Format query to fetch Pokémon Cards from API
-  const query = useMemo(() => {
+  // Format url to fetch Pokémon Cards from API
+  const url = useMemo(() => {
     const baseQuery = "https://api.pokemontcg.io/v2/cards";
     const queryParams: Record<string, string> = {
       select: "id,images",
@@ -92,17 +93,13 @@ const Home = () => {
     );
   }, [name, types, subtypes, rarities, orderBy, sortDirection]);
 
-  // Fetch data if a Pokêmon name if the name or query parameters change
+  // Fetch data if a Pokêmon name if the query parameters change
   useEffect(() => {
     if (!name) {
       return undefined;
     }
-    setIsLoading(true);
-    fetch(`${query}`)
-      .then((res) => res.json())
-      .then((res: ApiResponse) => setResponse(res))
-      .finally(() => setIsLoading(false));
-  }, [name, query]);
+    fetchData(url);
+  }, [name, url, fetchData]);
 
   if (!name) {
     return (
@@ -127,7 +124,7 @@ const Home = () => {
             {totalCount} {totalCount === 1 ? "result" : "results"} found
           </Title>
           <div className={styles.cards}>
-            {response?.data?.map((card) => (
+            {data.map((card) => (
               <Card card={card} key={card.id} />
             ))}
           </div>

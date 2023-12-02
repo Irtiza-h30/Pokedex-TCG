@@ -20,11 +20,7 @@
   }
   .label {
     display: flex;
-    gap: 42px;
     justify-content: space-between;
-    :first-child {
-      justify-content: flex-end;
-    }
   }
 }
 
