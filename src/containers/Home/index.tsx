@@ -5,6 +5,7 @@ import { useColorTheme } from "contexts/ColorThemeContext";
 
 import Card from "components/Card";
 import Filter from "components/Filter";
+import NoResultsFound from "components/NoResultsFound";
 
 import { MD_SCREEN_BREAKPOINT } from "constants";
 
@@ -15,7 +16,6 @@ import useFetchData from "hooks/useFetchData";
 import { PokemonCard } from "interfaces";
 
 import styles from "./index.module.scss";
-import NoResultsFound from "components/NoResultsFound";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -101,17 +101,6 @@ const Home = () => {
     fetchData(url);
   }, [name, url, fetchData]);
 
-  if (!name) {
-    return (
-      <Alert
-        type="info"
-        showIcon
-        message="Search for a Pokémon to view cards"
-        className={styles.alert}
-      />
-    );
-  }
-
   const renderContent = () => {
     if (isLoading) {
       return <Spin fullscreen size="large" />;
@@ -134,6 +123,17 @@ const Home = () => {
 
     return <NoResultsFound />;
   };
+
+  if (!name) {
+    return (
+      <Alert
+        type="info"
+        showIcon
+        message="Search for a Pokémon to view cards"
+        className={styles.alert}
+      />
+    );
+  }
 
   return (
     <Layout hasSider>
