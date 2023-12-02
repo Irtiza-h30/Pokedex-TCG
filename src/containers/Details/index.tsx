@@ -2,11 +2,14 @@ import { useEffect } from "react";
 import { Spin, Typography, Card, Tag } from "antd";
 import { Link, useParams } from "react-router-dom";
 
-import styles from "./index.module.scss";
 import BackButton from "components/BackButton";
-import { PokemonCard } from "interfaces";
 import NoResultsFound from "components/NoResultsFound";
+
 import useFetchData from "hooks/useFetchData";
+
+import { PokemonCard } from "interfaces";
+
+import styles from "./index.module.scss";
 
 const { Title, Text } = Typography;
 

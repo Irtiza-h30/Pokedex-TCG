@@ -10,12 +10,12 @@ import { MD_SCREEN_BREAKPOINT } from "constants";
 
 import useQueryParams from "hooks/userQueryParams";
 import useScreenSize from "hooks/useScreenSize";
+import useFetchData from "hooks/useFetchData";
 
 import { PokemonCard } from "interfaces";
 
 import styles from "./index.module.scss";
 import NoResultsFound from "components/NoResultsFound";
-import useFetchData from "hooks/useFetchData";
 
 const { Sider } = Layout;
 const { Title } = Typography;
