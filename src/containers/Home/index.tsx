@@ -75,14 +75,16 @@ const Home = () => {
       queryParams.q += ` AND (${formatTerms(rarities, "rarity")})`;
     }
 
+    const formattedOrderBy = `${orderBy.toLowerCase()},number`;
+
     if (orderBy === "rarity") {
       queryParams.orderBy = `${
         sortDirection === "asc" ? "-" : ""
-      }${orderBy.toLowerCase()}`;
+      }${formattedOrderBy}`;
     } else {
       queryParams.orderBy = `${
         sortDirection === "desc" ? "-" : ""
-      }${orderBy.toLowerCase()}`;
+      }${formattedOrderBy}`;
     }
 
     const queryString = new URLSearchParams(queryParams).toString();
