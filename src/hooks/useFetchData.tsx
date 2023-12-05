@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 
-const useFetchData = <T,>(initialState: T) => {
+const useFetchData = <T extends { data: unknown }>(initialState: T) => {
   const [response, setResponse] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   const fetchData = useCallback((url: string) => {
     setIsLoading(true);
@@ -12,7 +13,25 @@ const useFetchData = <T,>(initialState: T) => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  return { response, isLoading, fetchData };
+  const loadMoreData = useCallback((url: string) => {
+    setIsFetching(true);
+    fetch(url)
+      .then((res) => res.json())
+      .then((res: T) => {
+        setResponse((prev) => {
+          if (Array.isArray(prev.data) && Array.isArray(res.data)) {
+            return {
+              ...res,
+              data: [...prev.data, ...res.data],
+            };
+          }
+          return { ...res };
+        });
+      })
+      .finally(() => setIsFetching(false));
+  }, []);
+
+  return { response, isLoading, fetchData, isFetching, loadMoreData };
 };
 
 export default useFetchData;

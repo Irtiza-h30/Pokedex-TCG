@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { Alert, Layout, Spin, Typography } from "antd";
+import { Alert, Button, Layout, Spin, Typography } from "antd";
 
 import { useColorTheme } from "contexts/ColorThemeContext";
 
@@ -24,6 +24,7 @@ interface ApiResponse {
   count: number;
   data: Array<PokemonCard>;
   totalCount: number;
+  page: number;
 }
 
 // Utility function to format terms based on Lucene syntax
@@ -38,11 +39,13 @@ const Home = () => {
   const { isDarkMode } = useColorTheme();
   const { width } = useScreenSize();
 
-  const { response, isLoading, fetchData } = useFetchData<ApiResponse>({
-    count: 0,
-    data: [],
-    totalCount: 0,
-  });
+  const { response, isLoading, fetchData, isFetching, loadMoreData } =
+    useFetchData<ApiResponse>({
+      count: 0,
+      data: [],
+      totalCount: 0,
+      page: 0,
+    });
 
   const { data, totalCount } = response;
 
@@ -61,6 +64,7 @@ const Home = () => {
     const queryParams: Record<string, string> = {
       select: "id,images",
       q: `name:"${name}*"`,
+      pageSize: "20",
     };
 
     if (types) {
@@ -95,13 +99,17 @@ const Home = () => {
     );
   }, [name, types, subtypes, rarities, orderBy, sortDirection]);
 
-  // Fetch data if a Pokêmon name if the query parameters change
+  // Fetch data if a Pokêmon name if the query parameters change, initializing to page 1
   useEffect(() => {
     if (!name) {
       return undefined;
     }
-    fetchData(url);
+    fetchData(`${url}&page=1`);
   }, [name, url, fetchData]);
+
+  const onFetchMoreData = () => {
+    loadMoreData(`${url}&page=${response.page + 1}`);
+  };
 
   const renderContent = () => {
     if (isLoading) {
@@ -119,6 +127,15 @@ const Home = () => {
               <Card card={card} key={card.id} />
             ))}
           </div>
+          {data.length < totalCount && (
+            <Button
+              className={styles.loadMore}
+              loading={isFetching}
+              onClick={onFetchMoreData}
+            >
+              Load More
+            </Button>
+          )}
         </div>
       );
     }

@@ -11,10 +11,10 @@ const BackButton = ({ ...props }: ButtonProps) => {
 
   return (
     <Button
-      onClick={() => navigate(-1)}
       className={styles.button}
       data-testid="back"
       {...props}
+      onClick={() => navigate(-1)}
     >
       <Space size={6}>
         <span className={styles.icon}>
