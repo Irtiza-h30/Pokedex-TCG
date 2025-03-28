@@ -1,7 +1,7 @@
 .content {
   height: calc(100dvh - 82px);
   margin-top: 82px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overscroll-behavior-y: none;
 }
 
