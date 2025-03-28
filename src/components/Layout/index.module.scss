@@ -1,5 +1,5 @@
 .content {
-  height: calc(100vh - 82px);
+  height: calc(100dvh - 82px);
   margin-top: 82px;
   overflow-y: scroll;
   overscroll-behavior-y: none;
@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 1100px) {
   .content {
-    height: calc(100vh - 154px);
+    height: calc(100dvh - 154px);
     margin-top: 154px;
   }
 }
